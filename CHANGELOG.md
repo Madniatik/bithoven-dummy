@@ -2,6 +2,34 @@
 
 All notable changes to the Bithoven Dummy extension will be documented in this file.
 
+## [1.1.0] - 2025-11-13
+
+### Added
+- 🎨 Complete sidebar navigation menu with 5 sections
+- 📊 Dashboard page with statistics and quick actions
+- 📈 Reports page with Chart.js visualizations (pie and bar charts)
+- ⚙️ Settings page with configurable options
+- ℹ️ About page with extension and system information
+- 🏷️ Category field for items (general, important, archived)
+- 📦 Bulk delete operations for items
+- 💾 CSV export functionality for reports
+- 📄 Pagination support (15 items per page)
+- 🎯 Recent activity timeline in dashboard
+
+### Improved
+- Enhanced items page with better UX and layout
+- Better validation messages with category field
+- Responsive design improvements across all pages
+- Performance optimizations with indexed category column
+
+### Technical
+- New migration: `add_category_to_dummy_items`
+- 4 new controllers (Dashboard, Reports, Settings, About)
+- Layout system with reusable sidebar component
+- Chart.js integration for data visualization
+- Cache-based settings management
+- Proper route organization with grouped prefixes
+
 ## [1.0.0] - 2025-11-13
 
 ### Added

@@ -10,15 +10,16 @@ class DummyController extends Controller
 {
     public function index()
     {
-        $items = DummyItem::orderBy('order')->get();
+        $items = DummyItem::orderBy('order')->paginate(15);
         
-        return view('dummy::index', compact('items'));
+        return view('dummy::items.index', compact('items'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'category' => 'required|in:general,important,archived',
             'description' => 'nullable|string',
             'status' => 'required|in:active,inactive',
             'order' => 'required|integer|min:0',
@@ -37,6 +38,7 @@ class DummyController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'category' => 'required|in:general,important,archived',
             'description' => 'nullable|string',
             'status' => 'required|in:active,inactive',
             'order' => 'required|integer|min:0',
@@ -58,6 +60,21 @@ class DummyController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Dummy item deleted successfully',
+        ]);
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'integer|exists:dummy_items,id',
+        ]);
+
+        DummyItem::whereIn('id', $validated['ids'])->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => count($validated['ids']) . ' items deleted successfully',
         ]);
     }
 }
