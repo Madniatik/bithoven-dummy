@@ -130,7 +130,7 @@
     <!--end::Items table-->
 
     <!--begin::Create Item Modal-->
-    <div class="modal fade" id="createItemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="createItemModal" tabindex="-1" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -193,59 +193,78 @@
 
     @push('scripts')
     <script>
-        // Create item
-        document.getElementById('createItemForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            fetch('{{ route('dummy.items.store') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.reload();
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
+        // Prevent duplicate initialization with Livewire
+        if (!window.dummyItemsInitialized) {
+            window.dummyItemsInitialized = true;
 
-        // Delete item
-        document.querySelectorAll('.delete-item').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const itemId = this.dataset.id;
-                
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        fetch(`{{ route('dummy.items.index') }}/${itemId}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                window.location.reload();
-                            }
-                        });
-                    }
-                });
+            // Create item - Use event delegation to avoid duplicates
+            document.addEventListener('submit', function(e) {
+                if (e.target.id === 'createItemForm') {
+                    e.preventDefault();
+                    
+                    const form = e.target;
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    
+                    if (submitBtn.disabled) return; // Already submitting
+                    submitBtn.disabled = true;
+                    
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData);
+                    
+                    fetch('{{ route('dummy.items.store') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.reload();
+                        } else {
+                            submitBtn.disabled = false;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        submitBtn.disabled = false;
+                    });
+                }
             });
-        });
+
+            // Delete item - Use event delegation
+            document.addEventListener('click', function(e) {
+                const deleteBtn = e.target.closest('.delete-item');
+                if (deleteBtn) {
+                    const itemId = deleteBtn.dataset.id;
+                    
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`{{ route('dummy.items.index') }}/${itemId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
     </script>
     @endpush
 </x-dummy::layouts.main>
