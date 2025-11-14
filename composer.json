@@ -2,7 +2,7 @@
     "name": "bithoven/dummy",
     "description": "Dummy extension for development and testing purposes",
     "type": "library",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "license": "MIT",
     "authors": [
         {
@@ -30,7 +30,7 @@
             "name": "Dummy Extension",
             "slug": "dummy",
             "description": "A dummy extension for development and testing",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "author": "Bithoven Team",
             "dependencies": [],
             "repository": "https://github.com/Madniatik/bithoven-dummy",
