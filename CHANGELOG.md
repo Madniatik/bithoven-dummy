@@ -2,6 +2,27 @@
 
 All notable changes to the Dummy Extension will be documented in this file.
 
+## [1.4.7] - 2025-11-14
+
+### Added
+- **Color Field**: Hex color code for items (#000000 format)
+- **Icon Field**: Icon identifier for items (e.g., 'bi-star', 'fa-heart')
+- **Featured Flag**: Boolean to mark items as featured
+
+### Database
+- **Multiple Migrations**: 3 migrations executed in sequence
+  1. `add_color_to_dummy_items` - Adds color column (required, default #000000)
+  2. `add_icon_to_dummy_items` - Adds icon column (nullable)
+  3. `add_is_featured_to_dummy_items` - Adds is_featured column (default false)
+- All migrations executed automatically in correct order
+
+### Testing
+- Test case for multiple migrations execution
+- Verifies sequential migration processing
+- Validates all schema changes applied correctly
+
+---
+
 ## [1.4.6] - 2025-11-14
 
 ### Added
