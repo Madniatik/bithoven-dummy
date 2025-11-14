@@ -22,7 +22,7 @@ class DummyController extends Controller
             'category' => 'required|in:general,important,archived',
             'priority' => 'required|in:low,normal,high,critical',
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:pending,in_progress,completed,cancelled',
             'order' => 'required|integer|min:0',
         ]);
 
@@ -42,7 +42,7 @@ class DummyController extends Controller
             'category' => 'required|in:general,important,archived',
             'priority' => 'required|in:low,normal,high,critical',
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:pending,in_progress,completed,cancelled',
             'order' => 'required|integer|min:0',
         ]);
 
