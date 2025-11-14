@@ -1,13 +1,13 @@
 {
   "name": "dummy",
-  "version": "1.4.3",
+  "version": "1.4.8",
   "description": "Dummy extension for development and testing purposes",
   "migrations": {
     "required": true,
     "count": 1,
     "can_skip": false,
     "details": [
-      "2025_11_14_000005_test_rollback_failure"
+      "2025_11_14_000011_add_priority_to_dummy_items"
     ],
     "description": "⚠️ TESTING ONLY: This migration will fail intentionally to test rollback"
   },
@@ -17,7 +17,19 @@
     "bithoven/core": "^1.0"
   },
   "changelog": {
-    "v1.4.2": {
+    "v1.4.8": {
+      "date": "2025-11-14",
+      "changes": [
+        "Added priority field to items (low, normal, high, urgent)",
+        "Enum column for priority management",
+        "Default value: normal",
+        "Test for components metadata display"
+      ],
+      "migration_notes": "⚠️ This update adds a priority field. A backup will be created automatically.",
+      "breaking_changes": false,
+      "components": ["code", "database", "views", "config"]
+    },
+    "v1.4.7": {
       "date": "2025-11-14",
       "changes": [
         "Fixed: Migration now properly handles existing status column",
