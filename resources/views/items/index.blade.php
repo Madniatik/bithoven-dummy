@@ -86,11 +86,17 @@
                                     </td>
                                     <td>{{ Str::limit($item->description, 50) ?: '-' }}</td>
                                     <td>
-                                        @if($item->status === 'active')
-                                            <span class="badge badge-light-success">Active</span>
-                                        @else
-                                            <span class="badge badge-light-warning">Inactive</span>
-                                        @endif
+                                        @php
+                                            $statusColors = [
+                                                'pending' => 'badge-light-warning',
+                                                'in_progress' => 'badge-light-primary',
+                                                'completed' => 'badge-light-success',
+                                                'cancelled' => 'badge-light-danger'
+                                            ];
+                                        @endphp
+                                        <span class="badge {{ $statusColors[$item->status] ?? 'badge-light' }}">
+                                            {{ ucfirst(str_replace('_', ' ', $item->status)) }}
+                                        </span>
                                     </td>
                                     <td>{{ $item->order }}</td>
                                     <td class="text-end">
@@ -172,8 +178,10 @@
                         <div class="mb-5">
                             <label class="required form-label">Status</label>
                             <select name="status" class="form-select" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="pending" selected>Pending</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
                             </select>
                         </div>
                         <div class="mb-5">
