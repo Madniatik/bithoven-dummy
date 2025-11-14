@@ -19,10 +19,10 @@ class DummyController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|in:general,important,archived',
-            'priority' => 'required|in:low,normal,high,critical',
+            'category' => 'required|in:' . implode(',', DummyItem::getCategories()),
+            'priority' => 'required|in:' . implode(',', DummyItem::getPriorities()),
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:' . implode(',', DummyItem::getStatuses()),
             'order' => 'required|integer|min:0',
         ]);
 
@@ -39,10 +39,10 @@ class DummyController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|in:general,important,archived',
-            'priority' => 'required|in:low,normal,high,critical',
+            'category' => 'required|in:' . implode(',', DummyItem::getCategories()),
+            'priority' => 'required|in:' . implode(',', DummyItem::getPriorities()),
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:' . implode(',', DummyItem::getStatuses()),
             'order' => 'required|integer|min:0',
         ]);
 

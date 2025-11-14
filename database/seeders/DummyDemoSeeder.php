@@ -18,7 +18,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'general',
                 'priority' => 'normal',
                 'description' => 'This is a demo task to showcase the extension functionality',
-                'status' => 'active',
+                'status' => 'pending',
                 'order' => 1,
             ],
             [
@@ -26,7 +26,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'important',
                 'priority' => 'high',
                 'description' => 'Quarterly business review meeting with stakeholders',
-                'status' => 'active',
+                'status' => 'in_progress',
                 'order' => 2,
             ],
             [
@@ -34,7 +34,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'technical',
                 'priority' => 'normal',
                 'description' => 'Review pull requests for the new feature implementation',
-                'status' => 'active',
+                'status' => 'completed',
                 'order' => 3,
             ],
             [
@@ -42,7 +42,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'urgent',
                 'priority' => 'critical',
                 'description' => 'Critical production bug affecting user authentication',
-                'status' => 'active',
+                'status' => 'in_progress',
                 'order' => 4,
             ],
             [
@@ -50,7 +50,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'general',
                 'priority' => 'low',
                 'description' => 'Update API documentation for the latest release',
-                'status' => 'active',
+                'status' => 'pending',
                 'order' => 5,
             ],
             [
@@ -58,7 +58,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'technical',
                 'priority' => 'high',
                 'description' => 'Optimize slow queries and add missing indexes',
-                'status' => 'active',
+                'status' => 'in_progress',
                 'order' => 6,
             ],
             [
@@ -66,7 +66,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'important',
                 'priority' => 'normal',
                 'description' => 'Conduct training session on new development tools',
-                'status' => 'active',
+                'status' => 'completed',
                 'order' => 7,
             ],
             [
@@ -74,7 +74,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'urgent',
                 'priority' => 'high',
                 'description' => 'Perform security audit and vulnerability assessment',
-                'status' => 'active',
+                'status' => 'pending',
                 'order' => 8,
             ],
             [
@@ -82,7 +82,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'important',
                 'priority' => 'high',
                 'description' => 'Present project progress and upcoming milestones to client',
-                'status' => 'active',
+                'status' => 'in_progress',
                 'order' => 9,
             ],
             [
@@ -90,7 +90,7 @@ class DummyDemoSeeder extends Seeder
                 'category' => 'technical',
                 'priority' => 'normal',
                 'description' => 'Load testing for the new API endpoints',
-                'status' => 'active',
+                'status' => 'completed',
                 'order' => 10,
             ],
         ];

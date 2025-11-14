@@ -1,3 +1,7 @@
+@php
+use Bithoven\Dummy\Models\DummyItem;
+@endphp
+
 <x-dummy::layouts.main title="Items" breadcrumb="dummy.items.index">
     <!--begin::Toolbar-->
     <div class="d-flex flex-wrap flex-stack mb-6">
@@ -86,11 +90,9 @@
                                     </td>
                                     <td>{{ Str::limit($item->description, 50) ?: '-' }}</td>
                                     <td>
-                                        @if($item->status === 'active')
-                                            <span class="badge badge-light-success">Active</span>
-                                        @else
-                                            <span class="badge badge-light-warning">Inactive</span>
-                                        @endif
+                                        <span class="badge {{ $item->getStatusBadgeClass() }}">
+                                            {{ $item->getStatusLabel() }}
+                                        </span>
                                     </td>
                                     <td>{{ $item->order }}</td>
                                     <td class="text-end">
@@ -151,18 +153,19 @@
                         <div class="mb-5">
                             <label class="required form-label">Category</label>
                             <select name="category" class="form-select" required>
-                                <option value="general">General</option>
-                                <option value="important">Important</option>
-                                <option value="archived">Archived</option>
+                                @foreach(DummyItem::getCategories() as $category)
+                                    <option value="{{ $category }}">{{ ucfirst($category) }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-5">
                             <label class="required form-label">Priority</label>
                             <select name="priority" class="form-select" required>
-                                <option value="low">Low</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="high">High</option>
-                                <option value="critical">Critical</option>
+                                @foreach(DummyItem::getPriorities() as $priority)
+                                    <option value="{{ $priority }}" {{ $priority === DummyItem::PRIORITY_NORMAL ? 'selected' : '' }}>
+                                        {{ ucfirst($priority) }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-5">
@@ -172,8 +175,9 @@
                         <div class="mb-5">
                             <label class="required form-label">Status</label>
                             <select name="status" class="form-select" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                @foreach(DummyItem::getStatuses() as $status)
+                                    <option value="{{ $status }}">{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-5">
