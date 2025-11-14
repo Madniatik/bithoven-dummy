@@ -1,6 +1,7 @@
 {
-  "name": "dummy",
-  "version": "1.5.1",
+  "name": "Dummy Extension",
+    "slug": "dummy",
+    "version": "1.5.2",
   "description": "Dummy extension for development and testing purposes",
   "migrations": {
     "required": true,
