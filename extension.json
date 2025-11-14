@@ -1,61 +1,20 @@
 {
   "name": "Dummy Extension",
-    "slug": "dummy",
-    "version": "1.5.3",
+  "slug": "dummy",
+  "version": "1.5.3",
   "description": "Dummy extension for development and testing purposes",
+  "category": "Development",
+  "icon": "ki-code",
+  "featured": false,
+  "tags": ["development", "testing", "demo"],
   "migrations": {
     "required": true,
-    "count": 1,
-    "can_skip": false,
-    "details": [
-      "2025_11_14_000011_add_priority_to_dummy_items"
-    ],
-    "description": "⚠️ TESTING ONLY: This migration will fail intentionally to test rollback"
+    "count": 5,
+    "can_skip": false
   },
   "breaking_changes": false,
   "min_version": "1.3.0",
   "dependencies": {
     "bithoven/core": "^1.0"
-  },
-  "changelog": {
-    "v1.4.8": {
-      "date": "2025-11-14",
-      "changes": [
-        "Added priority field to items (low, normal, high, urgent)",
-        "Enum column for priority management",
-        "Default value: normal",
-        "Test for components metadata display"
-      ],
-      "migration_notes": "⚠️ This update adds a priority field. A backup will be created automatically.",
-      "breaking_changes": false,
-      "components": ["code", "database", "views", "config"]
-    },
-    "v1.4.7": {
-      "date": "2025-11-14",
-      "changes": [
-        "Fixed: Migration now properly handles existing status column",
-        "Drops old STRING status column",
-        "Creates new ENUM status column with workflow states",
-        "Proper rollback support to restore STRING column"
-      ],
-      "migration_notes": "⚠️ This update modifies the existing status column. A backup will be created automatically before updating.",
-      "breaking_changes": false
-    },
-    "v1.4.0": {
-      "date": "2025-11-14",
-      "changes": [
-        "Added status field for items (pending, in_progress, completed, cancelled)",
-        "Status workflow system with validation",
-        "Status badges in item listing",
-        "Database migration required for status column"
-      ],
-      "migration_notes": "⚠️ This update requires database migration. A backup will be created automatically before updating.",
-      "breaking_changes": false
-    }
-  },
-  "test_scenarios": {
-    "success": "Update with migrations enabled - should complete successfully",
-    "rollback": "Simulate migration failure - should auto-rollback to v1.3.1",
-    "blocked": "Attempt update without migrations - should be blocked by validation"
   }
 }
