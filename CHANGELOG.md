@@ -5,22 +5,29 @@ All notable changes to the Dummy Extension will be documented in this file.
 ## [1.4.0] - 2025-11-14
 
 ### Added
-- **Rollback Testing**: Intentional migration failure for testing automatic rollback functionality
-- Migration `2025_11_14_000001_intentional_failure_for_rollback_test.php`
+- **Status System**: New status field for items workflow tracking
+  - Statuses: `pending`, `in_progress`, `completed`, `cancelled`
+  - Default status: `pending` for new items
+  - Status column indexed for better query performance
+  - Status badges with color coding in item listing
 
-### Purpose
-This version is specifically designed to test the automatic rollback functionality of the Extension Manager. When updating from v1.3.1 to v1.4.0, the migration will fail intentionally, triggering the rollback mechanism.
+### Database
+- **Migration Required**: `add_status_to_dummy_items` migration
+- Adds `status` enum column to `dummy_items` table
+- ⚠️ **This update requires running migrations** - cannot be skipped
+- Automatic backup will be created before update
 
-### Expected Behavior
-1. User updates from v1.3.1 to v1.4.0
-2. Migration fails with: "Intentional migration failure for rollback testing"
-3. System automatically:
-   - Rolls back the failed migration
-   - Restores extension from automatic backup
-   - Reverts to v1.3.1
-   - Preserves all user data
+### Testing
+- Test scenarios for update validation system
+- Migration requirement detection testing
+- Rollback mechanism validation
 
-⚠️ **Warning**: This version will ALWAYS fail during installation/update. Only use for testing rollback functionality.
+### Technical
+- Added `extension.json` with migration metadata
+- Migration pattern: `add_*_to_*_table` (detected as required)
+- Compatible with new migration requirement validation system
+
+---
 
 ## [1.3.1] - 2025-11-13
 
