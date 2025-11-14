@@ -2,6 +2,20 @@
 
 All notable changes to the Dummy Extension will be documented in this file.
 
+## [1.4.5] - 2025-11-14
+
+### Changed
+- **Code Documentation**: Added PHPDoc comments to controller methods
+- Improved code readability and IDE support
+- No database changes required
+
+### Testing
+- Test case for update without migrations
+- Verifies code update without database modifications
+- No migration execution expected
+
+---
+
 ## [1.4.4] - 2025-11-14
 
 ### Added

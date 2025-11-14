@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class DummyController extends Controller
 {
+    /**
+     * Display a listing of dummy items.
+     * 
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $items = DummyItem::orderBy('order')->paginate(15);
