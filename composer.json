@@ -2,7 +2,7 @@
     "name": "bithoven/dummy",
     "description": "Dummy extension for development and testing purposes",
     "type": "library",
-    "version": "1.5.3",
+    "version": "1.6.0",
     "license": "MIT",
     "authors": [
         {
